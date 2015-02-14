@@ -22,7 +22,9 @@ DATABASES = {
         'USER': get_env_variable('DJ_##PROJECT##_DEV_DB_USER'),
         'PASS': get_env_variable('DJ_##PROJECT##_DEV_DB_PASS'),
         'HOST': '',
-        'PORT': ''}}
+        'PORT': ''
+    }
+}
 
 SERVER_EMAIL = get_env_variable('DJ_##PROJECT##_DEV_SERVER_EMAIL')
 EMAIL_BACKEND = get_env_variable('DJ_##PROJECT##_DEV_EMAIL_BACKEND')

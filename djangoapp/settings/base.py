@@ -23,7 +23,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',)
+    'django.contrib.staticfiles',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -32,13 +33,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',)
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '_staticdir'),
-    os.path.join(BASE_DIR, '_bowerdir'),)
+    os.path.join(BASE_DIR, '_bowerdir'),
+)
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, '_templatedir'),)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, '_templatedir'),
+)
 
 ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = 'project.wsgi.application'
@@ -56,22 +61,27 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'},
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
         'simple': {
-            'format': '%(levelname)s %(message)s'}, },
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'misc': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_DIR, 'misc.log'),
             'mode': 'a',
-            'formatter': 'verbose'},
+            'formatter': 'verbose'
+        },
         'file_requests': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_DIR, 'requests.log'),
             'mode': 'a',
-            'formatter': 'verbose'},
+            'formatter': 'verbose'
+        },
         'file_db': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
@@ -83,21 +93,29 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_DIR, 'security.log'),
             'mode': 'a',
-            'formatter': 'verbose'}},
+            'formatter': 'verbose'
+        }
+    },
     'loggers': {
         'misc': {
             'handlers': ['misc'],
             'level': 'INFO',
-            'propagate': False},
+            'propagate': False
+        },
         'django.request': {
             'handlers': ['file_requests'],
             'level': 'INFO',
-            'propagate': False, },
+            'propagate': False,
+        },
         'django.db.backends': {
             'handlers': ['file_db'],
             'level': 'INFO',
-            'propagate': False},
+            'propagate': False
+        },
         'django.security': {
             'handlers': ['file_security'],
             'level': 'INFO',
-            'propagate': False, }, }, }
+            'propagate': False,
+        },
+    },
+}
