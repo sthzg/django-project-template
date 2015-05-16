@@ -45,6 +45,13 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, '_templatedir'),
 )
 
+LOCALE_PATHS = (
+    os.path.abspath(os.path.join(
+        BASE_DIR,
+        '../locale'
+    ))
+)
+
 ROOT_URLCONF = 'project.urls'
 WSGI_APPLICATION = 'project.wsgi.application'
 
