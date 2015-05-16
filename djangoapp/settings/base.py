@@ -14,20 +14,24 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 LOG_DIR = os.path.join(BASE_DIR, '../logs')
 
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-sys.path.insert(0, os.path.join(BASE_DIR, 'linked_apps'))
-
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-)
+
+    'django_nose',
+    'corsheaders',
+    'rest_framework',
+    'rest_framework_swagger',
+    'service',
+]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -46,10 +50,7 @@ TEMPLATE_DIRS = (
 )
 
 LOCALE_PATHS = (
-    os.path.abspath(os.path.join(
-        BASE_DIR,
-        '../locale'
-    ))
+    os.path.abspath(os.path.join(BASE_DIR, 'locale')),
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -59,7 +60,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Vienna'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False
+USE_TZ = True
 
 USE_X_FORWARDED_HOST = True
 
@@ -94,14 +95,40 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_DIR, 'db.log'),
             'mode': 'a',
-            'formatter': 'verbose'},
+            'formatter': 'verbose'
+        },
         'file_security': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_DIR, 'security.log'),
             'mode': 'a',
             'formatter': 'verbose'
-        }
+        },
+        'service': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'service.log'),
+            'mode': 'a',
+            'formatter': 'verbose'
+        },
+        'celery_task_logger': {
+            'level': 'INFO',
+            'filters': None,
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'celery_tasks.log'),
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 2,
+            'formatter': 'verbose'
+        },
+        'celery_logger': {
+            'level': 'INFO',
+            'filters': None,
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'celery.log'),
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 2,
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'misc': {
@@ -124,5 +151,55 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'service': {
+            'handlers': ['service'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'celery': {
+            'handlers': ['celery_logger'],
+            'level': 'INFO',
+            'propagate': True},
+        'celery.task': {
+            'handlers': ['celery_task_logger'],
+            'level': 'INFO',
+            'propagate': True
+        },
     },
 }
+
+# Django Cors Headers
+CORS_ORIGIN_WHITELIST = ()
+
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+)
+
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken'
+)
+
+# Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+# Django Nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

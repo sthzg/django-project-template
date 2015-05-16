@@ -11,7 +11,7 @@ import os
 from settings.utils import get_env_variable
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.{}".format(
-    get_env_variable('DJ_##PROJECT##_CURRENT_ENV')))
+    get_env_variable('DJ_PROJECT_CURRENT_ENV')))
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
