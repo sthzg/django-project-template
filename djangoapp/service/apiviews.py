@@ -10,14 +10,16 @@ from service.apiserializers import IndexSerializer
 
 @api_view(('GET',))
 def api_root(request, format=None):
-    """ Provides a root view for the browsable api. """
+    """ Provides a root view for the browsable api. 
+    """
     return Response({
         'index': reverse('service-api:index', request=request, format=format)
     })
 
 
 class IndexApiView(APIView):
-    """ Provides a Hello World endpoint to be overridden or trashed. """
+    """ Provides a Hello World endpoint to be overridden or trashed. 
+    """
     def get(self, request):
         content = {'greeting': "Hello World"}
         serializer = IndexSerializer(content)

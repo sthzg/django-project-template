@@ -9,7 +9,8 @@ from settings.utils import get_env_variable
 cur_env = get_env_variable('DJ_PROJECT_CURRENT_ENV')
 
 os.environ.setdefault(
-    'DJANGO_SETTINGS_MODULE', 'settings.{}'.format(cur_env))
+    'DJANGO_SETTINGS_MODULE', 'settings.{}'.format(cur_env)
+)
 
 app = Celery('project')
 
