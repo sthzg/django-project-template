@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_nose',
+    # Uncomment if your app should be a provider for oauth2 authentication
+    # More at https://django-oauth-toolkit.readthedocs.org/en/latest/tutorial/tutorial_01.html
+    # 'oauth2_provider',
     'corsheaders',
     'rest_framework',
     'rest_framework_swagger',
@@ -195,6 +198,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'oauth2_provider.ext.rest_framework.OAuth2Authentication', 
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',

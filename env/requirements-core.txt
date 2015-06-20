@@ -1,6 +1,7 @@
 Django<1.9
 djangorestframework<4
 djangorestframework-jwt
+django-oauth-toolkit
 django-rest-swagger
 django-cors-headers
 markdown

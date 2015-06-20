@@ -14,6 +14,12 @@ urlpatterns = [
         include('rest_framework.urls', namespace='rest_framework')
     ),
 
+    # Uncomment if you want to use oauth2_provider features.
+    #url(                                                                 # /o/*/
+    #    r'^o/', 
+    #    include('oauth2_provider.urls', namespace='oauth2_provider')
+    #),
+
     url(                                                      # /api-token-auth/
         r'^api-token-auth/',
         'rest_framework_jwt.views.obtain_jwt_token'
