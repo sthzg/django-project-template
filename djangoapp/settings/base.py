@@ -198,6 +198,14 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken'
 )
 
+# Django Oauth Tookit
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope', 
+        'write': 'Write scope', 
+    }
+}
+
 # Django Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
