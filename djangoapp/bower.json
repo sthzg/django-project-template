@@ -1,0 +1,18 @@
+{
+  "name": "djangoapp",
+  "version": "0.0.0",
+  "authors": [
+    "Foo Bar <foobar@example.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "_bowerdir",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
