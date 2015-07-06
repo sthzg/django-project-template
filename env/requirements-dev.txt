@@ -3,3 +3,6 @@ httpie
 sphinx
 mock
 ansible
+django-extensions
+pyOpenSSL
+Werkzeug
